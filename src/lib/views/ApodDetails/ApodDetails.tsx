@@ -7,9 +7,11 @@ import { getApodByDate } from "../../services/apod.services";
 import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
 import Button from "../../components/Button";
+import { useBookmarksStore } from "../../store/bookmarks.store";
 
 export default function ApodDetails() {
   const { id } = useParams();
+  const { bookmarks, setBookmark } = useBookmarksStore();
   const navigate = useNavigate();
   const [apod, setApod] = useState<Apod | undefined>(undefined);
 
@@ -37,6 +39,11 @@ export default function ApodDetails() {
         {apod && (
           <>
             <Card apod={apod} />
+            <Button
+              action={() => setBookmark(apod.date)}
+              text={bookmarks.has(apod.date) ? "Saved" : "Save"}
+              w="w-full mt-4"
+            />
             <p className="text-base py-4">{apod.explanation}</p>
           </>
         )}

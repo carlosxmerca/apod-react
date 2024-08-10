@@ -7,6 +7,7 @@ import {
 } from "../components/Selectors";
 import NotFound from "../views/NotFound";
 import ApodDetails from "../views/ApodDetails/ApodDetails";
+import Bookmarks from "../views/Bookmarks";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
   {
     path: "apod/:id",
     element: <ApodDetails />,
+  },
+  {
+    path: "bookmarks",
+    element: <Bookmarks />,
   },
   {
     path: "*",

@@ -17,17 +17,7 @@ export default function Header({ showNav = true }: HeaderProps) {
       {showNav && (
         <nav className="w-full flex justify-around mt-6">
           <Link
-            to="range"
-            className={
-              location.pathname === "/range"
-                ? "border-b-2 border-white"
-                : "text-[#A6A6A6]"
-            }
-          >
-            Range
-          </Link>
-          <Link
-            to=""
+            to="/"
             className={
               location.pathname === "/"
                 ? "border-b-2 border-white"
@@ -37,7 +27,17 @@ export default function Header({ showNav = true }: HeaderProps) {
             Explore
           </Link>
           <Link
-            to="date"
+            to="/range"
+            className={
+              location.pathname === "/range"
+                ? "border-b-2 border-white"
+                : "text-[#A6A6A6]"
+            }
+          >
+            Range
+          </Link>
+          <Link
+            to="/date"
             className={
               location.pathname === "/date"
                 ? "border-b-2 border-white"
@@ -45,6 +45,16 @@ export default function Header({ showNav = true }: HeaderProps) {
             }
           >
             Date
+          </Link>
+          <Link
+            to="/bookmarks"
+            className={
+              location.pathname === "/bookmarks"
+                ? "border-b-2 border-white"
+                : "text-[#A6A6A6]"
+            }
+          >
+            Saved
           </Link>
         </nav>
       )}
