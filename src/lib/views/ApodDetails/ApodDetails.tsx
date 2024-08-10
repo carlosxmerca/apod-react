@@ -42,6 +42,7 @@ export default function ApodDetails() {
             <Button
               action={() => setBookmark(apod.date)}
               text={bookmarks.has(apod.date) ? "Saved" : "Save"}
+              theme={bookmarks.has(apod.date) ? "secondary" : "primary"}
               w="w-full mt-4"
             />
             <p className="text-base py-4">{apod.explanation}</p>

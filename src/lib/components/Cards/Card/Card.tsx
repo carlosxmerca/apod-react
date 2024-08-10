@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Apod } from "../../../models/apod.model";
+import moment from "moment";
+import Image from "../../Image";
 
 interface CardProps {
   apod: Apod;
@@ -7,6 +9,7 @@ interface CardProps {
 
 export default function Card({ apod }: CardProps) {
   const navigate = useNavigate();
+  const dateFormat = moment(apod.date, "YYYY-MM-DD").format("MMMM Do YYYY");
 
   return (
     <div
@@ -14,11 +17,11 @@ export default function Card({ apod }: CardProps) {
       className="w-full relative h-[15rem] rounded-2xl"
     >
       <div className="z-10 absolute bottom-2 left-2">
-        <p className="font-medium">{new Date(apod.date).toDateString()}</p>
+        <p className="font-medium">{dateFormat}</p>
         <p className="font-medium">{apod.title}</p>
       </div>
       <div className="gradient-overlay"></div>
-      <img className="h-full w-full object-cover rounded-2xl" src={apod.url} />
+      <Image src={apod.url} className="rounded-2xl" />
     </div>
   );
 }
