@@ -8,12 +8,14 @@ import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
 import Button from "../../components/Button";
 import { useBookmarksStore } from "../../store/bookmarks.store";
+import Loading from "../../components/Loading";
 
 export default function ApodDetails() {
   const { id } = useParams();
   const { bookmarks, setBookmark } = useBookmarksStore();
   const navigate = useNavigate();
   const [apod, setApod] = useState<Apod | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async (date: string) => {
@@ -21,7 +23,11 @@ export default function ApodDetails() {
         toast.info("Search date is not valid!");
         return;
       }
+
+      setLoading(true);
       const explore: Apod[] = await getApodByDate(date);
+      setLoading(false);
+
       if (explore.length === 0) {
         toast.error("No results were found");
         return;
@@ -33,23 +39,26 @@ export default function ApodDetails() {
   }, [id]);
 
   return (
-    <main className="flex flex-col items-center px-6">
-      <Header showNav={false} />
-      <div className="max-w-[60rem] pt-4 pb-8">
-        {apod && (
-          <>
-            <Card apod={apod} />
-            <Button
-              action={() => setBookmark(apod.date)}
-              text={bookmarks.has(apod.date) ? "Saved" : "Save"}
-              theme={bookmarks.has(apod.date) ? "secondary" : "primary"}
-              w="w-full mt-4"
-            />
-            <p className="text-base py-4">{apod.explanation}</p>
-          </>
-        )}
-        <Button action={() => navigate("/")} text="Home" w="w-full" />
-      </div>
-    </main>
+    <>
+      <Loading loading={loading} />
+      <main className="flex flex-col items-center px-6">
+        <Header showNav={false} />
+        <div className="max-w-[60rem] pt-4 pb-8">
+          {apod && (
+            <>
+              <Card apod={apod} />
+              <Button
+                action={() => setBookmark(apod.date)}
+                text={bookmarks.has(apod.date) ? "Saved" : "Save"}
+                theme={bookmarks.has(apod.date) ? "secondary" : "primary"}
+                w="w-full mt-4"
+              />
+              <p className="text-base py-4">{apod.explanation}</p>
+            </>
+          )}
+          <Button action={() => navigate("/")} text="Home" w="w-full" />
+        </div>
+      </main>
+    </>
   );
 }
