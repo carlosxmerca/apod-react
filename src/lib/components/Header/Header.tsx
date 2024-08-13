@@ -1,11 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/img/nasa.webp";
 
-interface HeaderProps {
-  showNav?: boolean;
-}
-
-export default function Header({ showNav = true }: HeaderProps) {
+export default function Header() {
   const location = useLocation();
 
   return (
@@ -14,7 +10,7 @@ export default function Header({ showNav = true }: HeaderProps) {
         <p className="text-2xl">APOD</p>
         <img className="h-12 object-contain" src={logo} />
       </div>
-      {showNav && (
+      {!location.pathname.startsWith("/apod") && (
         <nav className="w-full flex justify-around mt-6">
           <Link
             to="/"

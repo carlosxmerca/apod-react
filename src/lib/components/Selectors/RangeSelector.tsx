@@ -9,8 +9,9 @@ import {
   isValidDate,
   validateRangeSelection,
 } from "../../validators/date.validator";
+import { SelectorProps } from "../../interface/selectors";
 
-export default function RangeSelector() {
+export default function RangeSelector({ setLoading }: SelectorProps) {
   const { setApods, reset } = useApodStore();
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
@@ -24,7 +25,11 @@ export default function RangeSelector() {
       toast.info("Date interval should not be greater than 30 days");
       return;
     }
+
+    setLoading(true);
     const explore: Apod[] = await getApodsByRange(from, to);
+    setLoading(false);
+    
     if (explore.length === 0) {
       toast.error("No results were found");
       return;

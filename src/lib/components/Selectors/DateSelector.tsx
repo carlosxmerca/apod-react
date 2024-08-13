@@ -6,8 +6,9 @@ import { getApodByDate } from "../../services/apod.services";
 import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
 import { isValidDate } from "../../validators/date.validator";
+import { SelectorProps } from "../../interface/selectors";
 
-export default function DateSelector() {
+export default function DateSelector({ setLoading }: SelectorProps) {
   const { setApods, reset } = useApodStore();
   const [date, setDate] = useState<string>("");
 
@@ -16,8 +17,11 @@ export default function DateSelector() {
       toast.info("Select a date to explore!");
       return;
     }
-    console.log(date);
+
+    setLoading(true);
     const explore: Apod[] = await getApodByDate(date);
+    setLoading(false);
+
     if (explore.length === 0) {
       toast.error("No results were found");
       return;

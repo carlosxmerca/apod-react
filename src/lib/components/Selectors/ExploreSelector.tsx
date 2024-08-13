@@ -4,12 +4,15 @@ import Button from "../Button";
 import { getRandomApod } from "../../services/apod.services";
 import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
+import { SelectorProps } from "../../interface/selectors";
 
-export default function ExploreSelector() {
+export default function ExploreSelector({ setLoading }: SelectorProps) {
   const { total, addApod, reset } = useApodStore();
 
   const onExploreApods = async () => {
+    setLoading(true);
     const explore: Apod[] = await getRandomApod();
+    setLoading(false);
     if (explore.length === 0) {
       toast.error("No results were found");
       return;
