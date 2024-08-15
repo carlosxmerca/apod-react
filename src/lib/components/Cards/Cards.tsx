@@ -9,8 +9,8 @@ export default function Cards() {
   return (
     <div className="w-full flex-col flex-1 pt-4 pb-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {apods.map((apod: Apod, index: number) => (
-          <Card key={`${apod.date}${index}`} apod={apod} />
+        {apods.map((apod: Apod) => (
+          <Card key={apod.date} apod={apod} />
         ))}
       </div>
       {apods.length === 0 && <Message message="Start exploring!" />}
