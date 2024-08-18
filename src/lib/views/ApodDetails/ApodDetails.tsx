@@ -8,8 +8,11 @@ import { toast } from "sonner";
 import Button from "../../components/Button";
 import { useBookmarksStore } from "../../store/bookmarks.store";
 import { SelectorProps } from "../../interface/selectors";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function ApodDetails({ setLoading }: SelectorProps) {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { bookmarks, setBookmark } = useBookmarksStore();
@@ -18,7 +21,7 @@ export default function ApodDetails({ setLoading }: SelectorProps) {
   useEffect(() => {
     const getData = async (date: string) => {
       if (!isValidDate(date)) {
-        toast.info("Search date is not valid!");
+        toast.info(t(TKeys.InfoSelectDate));
         return;
       }
 
@@ -27,7 +30,7 @@ export default function ApodDetails({ setLoading }: SelectorProps) {
       setLoading(false);
 
       if (explore.length === 0) {
-        toast.error("No results were found");
+        toast.error(t(TKeys.InfoNoResultsFound));
         return;
       }
       setApod(explore?.[0]);
@@ -43,14 +46,14 @@ export default function ApodDetails({ setLoading }: SelectorProps) {
           <Card apod={apod} />
           <Button
             action={() => setBookmark(apod.date)}
-            text={bookmarks.has(apod.date) ? "Saved" : "Save"}
+            text={bookmarks.has(apod.date) ? t(TKeys.Saved) : t(TKeys.Save)}
             theme={bookmarks.has(apod.date) ? "secondary" : "primary"}
             w="w-full mt-4"
           />
           <p className="text-base py-4">{apod.explanation}</p>
         </>
       )}
-      <Button action={() => navigate("/")} text="Home" w="w-full" />
+      <Button action={() => navigate("/")} text={t(TKeys.Home)} w="w-full" />
     </div>
   );
 }

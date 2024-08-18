@@ -1,0 +1,18 @@
+{
+  "explore": "Explorar",
+  "range": "Rango",
+  "date": "Fecha",
+  "bookmarks": "Favoritos",
+  "count": "Imagenes:",
+  "saved": "Guardado",
+  "save": "Guardar",
+  "home": "Inicio",
+  "remove-bookmarks": "Eliminar marcadores",
+  "start-exploring": "¡Empieza a explorar!",
+  "info-select-date": "¡Selecciona una fecha para explorar!",
+  "info-date-not-valid": "¡La fecha de búsqueda no es válida!",
+  "info-no-results-found": "No se encontraron resultados",
+  "info-lost": "¡Parece que estás perdido!",
+  "info-select-range": "¡Selecciona un rango de fechas para explorar!",
+  "info-date-interval-length": "El intervalo de fechas no debe ser mayor de 30 días"
+}

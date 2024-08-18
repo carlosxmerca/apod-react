@@ -5,8 +5,11 @@ import { getRandomApod } from "../../services/apod.services";
 import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
 import { SelectorProps } from "../../interface/selectors";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function ExploreSelector({ setLoading }: SelectorProps) {
+  const { t } = useTranslation();
   const { total, addApod, reset } = useApodStore();
 
   const onExploreApods = async () => {
@@ -14,7 +17,7 @@ export default function ExploreSelector({ setLoading }: SelectorProps) {
     const explore: Apod[] = await getRandomApod();
     setLoading(false);
     if (explore.length === 0) {
-      toast.error("No results were found");
+      toast.error(t(TKeys.InfoNoResultsFound));
       return;
     }
     addApod(explore);
@@ -25,10 +28,10 @@ export default function ExploreSelector({ setLoading }: SelectorProps) {
   return (
     <div className="w-full flex justify-between">
       <div className="flex items-center gap-2">
-        <p className="">Count:</p>
+        <p className="">{t(TKeys.Count)}</p>
         <Button text={total.toString()} />
       </div>
-      <Button action={onExploreApods} text="Explore" />
+      <Button action={onExploreApods} text={t(TKeys.Explore)} />
     </div>
   );
 }

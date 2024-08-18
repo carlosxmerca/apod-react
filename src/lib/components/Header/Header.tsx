@@ -1,7 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/img/nasa.webp";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function Header() {
+  const { t } = useTranslation();
   const location = useLocation();
 
   return (
@@ -20,7 +23,7 @@ export default function Header() {
                 : "text-[#A6A6A6]"
             }
           >
-            Explore
+            {t(TKeys.Explore)}
           </Link>
           <Link
             to="/range"
@@ -30,7 +33,7 @@ export default function Header() {
                 : "text-[#A6A6A6]"
             }
           >
-            Range
+            {t(TKeys.Range)}
           </Link>
           <Link
             to="/date"
@@ -40,7 +43,7 @@ export default function Header() {
                 : "text-[#A6A6A6]"
             }
           >
-            Date
+            {t(TKeys.Date)}
           </Link>
           <Link
             to="/bookmarks"
@@ -50,7 +53,7 @@ export default function Header() {
                 : "text-[#A6A6A6]"
             }
           >
-            Saved
+            {t(TKeys.Bookmarks)}
           </Link>
         </nav>
       )}

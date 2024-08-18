@@ -1,0 +1,18 @@
+{
+  "explore": "Explore",
+  "range": "Range",
+  "date": "Date",
+  "bookmarks": "Saved",
+  "count": "Count:",
+  "saved": "Saved",
+  "save": "Save",
+  "home": "Home",
+  "remove-bookmarks": "Remove Bookmarks",
+  "start-exploring": "Start exploring!",
+  "info-select-date": "Select a date to explore!",
+  "info-date-not-valid": "Search date is not valid!",
+  "info-no-results-found": "No results were found",
+  "info-lost": "Looks like you are lost!",
+  "info-select-range": "Select a date range to explore!",
+  "info-date-interval-length": "Date interval should not be greater than 30 days"
+}

@@ -10,28 +10,31 @@ import {
   validateRangeSelection,
 } from "../../validators/date.validator";
 import { SelectorProps } from "../../interface/selectors";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function RangeSelector({ setLoading }: SelectorProps) {
+  const { t } = useTranslation();
   const { setApods, reset } = useApodStore();
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
 
   const onSearchByRange = async () => {
     if (!isValidDate(from) || !isValidDate(to)) {
-      toast.info("Select a date range to explore!");
+      toast.info(t(TKeys.InfoSelectRange));
       return;
     }
     if (!validateRangeSelection(from, to)) {
-      toast.info("Date interval should not be greater than 30 days");
+      toast.info(t(TKeys.InfoDateIntervalLength));
       return;
     }
 
     setLoading(true);
     const explore: Apod[] = await getApodsByRange(from, to);
     setLoading(false);
-    
+
     if (explore.length === 0) {
-      toast.error("No results were found");
+      toast.error(t(TKeys.InfoNoResultsFound));
       return;
     }
     setApods(explore);
@@ -46,7 +49,7 @@ export default function RangeSelector({ setLoading }: SelectorProps) {
         <DateInput value={to} onChange={setTo} />
       </div>
       <div className="w-full">
-        <Button action={onSearchByRange} text="Explore" w="w-full" />
+        <Button action={onSearchByRange} text={t(TKeys.Explore)} w="w-full" />
       </div>
     </div>
   );

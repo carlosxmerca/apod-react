@@ -7,14 +7,17 @@ import { Apod } from "../../models/apod.model";
 import { toast } from "sonner";
 import { isValidDate } from "../../validators/date.validator";
 import { SelectorProps } from "../../interface/selectors";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function DateSelector({ setLoading }: SelectorProps) {
+  const { t } = useTranslation();
   const { setApods, reset } = useApodStore();
   const [date, setDate] = useState<string>("");
 
   const onSearchDateApod = async () => {
     if (!isValidDate(date)) {
-      toast.info("Select a date to explore!");
+      toast.info(t(TKeys.InfoSelectDate));
       return;
     }
 
@@ -23,7 +26,7 @@ export default function DateSelector({ setLoading }: SelectorProps) {
     setLoading(false);
 
     if (explore.length === 0) {
-      toast.error("No results were found");
+      toast.error(t(TKeys.InfoNoResultsFound));
       return;
     }
     setApods(explore);
@@ -36,7 +39,7 @@ export default function DateSelector({ setLoading }: SelectorProps) {
       <div className="flex items-center gap-2">
         <DateInput value={date} onChange={setDate} />
       </div>
-      <Button action={onSearchDateApod} text="Explore" />
+      <Button action={onSearchDateApod} text={t(TKeys.Explore)} />
     </div>
   );
 }

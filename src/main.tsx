@@ -5,6 +5,7 @@ import axios from "axios";
 import App from "./App.tsx";
 import { Toaster } from "sonner";
 import { BrowserRouter } from "react-router-dom";
+import "./i18n";
 
 axios.defaults.baseURL = "https://api.nasa.gov";
 axios.defaults.params = {};

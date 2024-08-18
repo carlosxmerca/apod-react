@@ -2,8 +2,11 @@ import Message from "../Message";
 import { Apod } from "../../models/apod.model";
 import Card from "./Card/Card";
 import { useApodStore } from "../../store/apods.store";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function Cards() {
+  const { t } = useTranslation();
   const { apods } = useApodStore();
 
   return (
@@ -13,7 +16,7 @@ export default function Cards() {
           <Card key={apod.date} apod={apod} />
         ))}
       </div>
-      {apods.length === 0 && <Message message="Start exploring!" />}
+      {apods.length === 0 && <Message message={t(TKeys.StartExploring)} />}
     </div>
   );
 }

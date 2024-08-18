@@ -6,8 +6,11 @@ import { getApodByDate } from "../../services/apod.services";
 import { Apod } from "../../models/apod.model";
 import Button from "../../components/Button";
 import { SelectorProps } from "../../interface/selectors";
+import { useTranslation } from "react-i18next";
+import { TKeys } from "../../interface/translate";
 
 export default function Bookmarks({ setLoading }: SelectorProps) {
+  const { t } = useTranslation();
   const { bookmarks, resetBookmarks } = useBookmarksStore();
   const { setApods, reset } = useApodStore();
 
@@ -41,7 +44,7 @@ export default function Bookmarks({ setLoading }: SelectorProps) {
             resetBookmarks();
             reset();
           }}
-          text="Remove Bookmarks"
+          text={t(TKeys.RemoveBookmarks)}
           w="w-full mb-4"
         />
       )}
