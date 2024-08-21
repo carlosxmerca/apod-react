@@ -1,10 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import logo from "../../../assets/img/nasa.webp";
-import { useTranslation } from "react-i18next";
-import { TKeys } from "../../interface/translate";
+import Navigation from "./Navigation";
 
 export default function Header() {
-  const { t } = useTranslation();
   const location = useLocation();
 
   return (
@@ -13,50 +11,7 @@ export default function Header() {
         <p className="text-2xl">APOD</p>
         <img className="h-12 object-contain" src={logo} />
       </div>
-      {!location.pathname.startsWith("/apod") && (
-        <nav className="w-full flex justify-around mt-6">
-          <Link
-            to="/"
-            className={
-              location.pathname === "/"
-                ? "border-b-2 border-white"
-                : "text-[#A6A6A6]"
-            }
-          >
-            {t(TKeys.Explore)}
-          </Link>
-          <Link
-            to="/range"
-            className={
-              location.pathname === "/range"
-                ? "border-b-2 border-white"
-                : "text-[#A6A6A6]"
-            }
-          >
-            {t(TKeys.Range)}
-          </Link>
-          <Link
-            to="/date"
-            className={
-              location.pathname === "/date"
-                ? "border-b-2 border-white"
-                : "text-[#A6A6A6]"
-            }
-          >
-            {t(TKeys.Date)}
-          </Link>
-          <Link
-            to="/bookmarks"
-            className={
-              location.pathname === "/bookmarks"
-                ? "border-b-2 border-white"
-                : "text-[#A6A6A6]"
-            }
-          >
-            {t(TKeys.Bookmarks)}
-          </Link>
-        </nav>
-      )}
+      {!location.pathname.startsWith("/apod") && <Navigation />}
     </header>
   );
 }
